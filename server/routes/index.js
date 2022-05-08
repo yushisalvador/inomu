@@ -8,8 +8,10 @@ app.use(router);
 require("dotenv").config({
   path: "../.env",
 });
+const cors = require("cors");
+router.use(cors());
 
-router.get("/", async (req, res) => {
+router.get("/posts", async (req, res) => {
   const response = await knex.select("*").from("posts");
   res.status(200).send(response);
 });
