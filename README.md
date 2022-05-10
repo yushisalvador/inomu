@@ -44,4 +44,4 @@ Distributed under the MIT License. See LICENSE.txt for more information.
 
 ## Contact
 github.com/yushisalvador 
-Project link: https://inomu-35534.firebaseapp.com/
+Project link: https://inomu-35534.web.app/
