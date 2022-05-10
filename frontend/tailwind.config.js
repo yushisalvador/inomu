@@ -10,9 +10,10 @@ module.exports = {
     extend: {
       colors: {
         primary: "#ec7263",
+        background: "#0e2431",
       },
       fontFamily: {
-        body: ["Dosis"],
+        body: ["Dosis", "Alfa Slab One"],
       },
     },
   },
