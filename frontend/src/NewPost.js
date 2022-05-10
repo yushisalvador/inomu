@@ -45,7 +45,6 @@ export default function NewPost() {
   };
 
   const submitPostReq = async (data) => {
-    console.log("submitPostReq:", data);
     try {
       await axios.post("http://localhost:8080/newpost", data);
     } catch (error) {
@@ -125,7 +124,6 @@ export default function NewPost() {
             <button
               type="submit"
               className="border  border-red-600 px-10 py-2 mt-2"
-              // onClick={uploadImg}
             >
               {" "}
               Post

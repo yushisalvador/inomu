@@ -32,6 +32,7 @@ export default function Feed({ postData, setSelectedPost, setView }) {
                   <img src={postObj.image} alt="cocktail" />
                 </div>
                 <div
+                  className="hover:cursor-pointer hover:underline"
                   onClick={() => {
                     setSelectedPost(index);
                     setView("single");

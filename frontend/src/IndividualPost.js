@@ -3,7 +3,24 @@ import React from "react";
 export default function IndividualPost({ setView, postData, selectedPost }) {
   return (
     <div>
-      <div className="text-left m-10" onClick={() => setView("feed")}>
+      <div
+        className="text-left m-10 hover:cursor-pointer"
+        onClick={() => setView("feed")}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-30 inline-block mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
         back
       </div>
       <div className="flex flex-col items-center">
