@@ -2,12 +2,12 @@
 This project was inspired by my own fondness of cocktails. This project aspires to build a community of people with the same interest toward cocktails.
 
 ## Built With
-React JS
-PostgreSQL
-Node JS
-Express
-TailwindCSS
-Firebase
+- React JS
+- PostgreSQL
+- Node JS
+- Express
+- TailwindCSS
+- Firebase
 
 ## Getting Started
 To get a local copy up and running follow these simple steps.
