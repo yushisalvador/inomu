@@ -3,7 +3,7 @@ import axios from "axios";
 import { storage } from "./firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-export default function NewPost() {
+export default function NewPost({}) {
   const [button, setShowButton] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [username, setUsername] = useState("");
@@ -41,6 +41,7 @@ export default function NewPost() {
     };
     console.log(newPostObj);
     hideForm();
+
     submitPostReq(newPostObj);
   };
 
@@ -115,9 +116,8 @@ export default function NewPost() {
                 type="file"
                 name="pic"
                 onChange={(e) => {
-                  const img = e.target.files[0];
-                  setImage(img);
-                  imgUpload(img);
+                  setImage(e.target.files[0]);
+                  imgUpload(e.target.files[0]);
                 }}
               />
             </div>
