@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { storage } from "./firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -12,17 +12,18 @@ export default function NewPost() {
   const [cocktail, setCocktail] = useState("");
   const [description, setDescription] = useState("");
   const [recipe, setRecipe] = useState("");
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   const [imageURL, setImageURL] = useState("");
 
   const metadata = {
     contentType: "image/jpeg",
   };
 
-  const imgUpload = () => {
+  const imgUpload = (image) => {
     const imageRef = ref(storage, `cocktails/${image.name}`);
     uploadBytes(imageRef, image, metadata).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
+        console.log("setting imageUrl to:", url);
         setImageURL(url);
       });
     });
@@ -44,6 +45,7 @@ export default function NewPost() {
   };
 
   const submitPostReq = async (data) => {
+    console.log("submitPostReq:", data);
     try {
       await axios.post("http://localhost:8080/newpost", data);
     } catch (error) {
@@ -114,8 +116,9 @@ export default function NewPost() {
                 type="file"
                 name="pic"
                 onChange={(e) => {
-                  setImage(e.target.files[0]);
-                  imgUpload();
+                  const img = e.target.files[0];
+                  setImage(img);
+                  imgUpload(img);
                 }}
               />
             </div>
