@@ -3,7 +3,7 @@ import axios from "axios";
 import { storage } from "./firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-export default function NewPost() {
+export default function NewPost({}) {
   const [button, setShowButton] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [username, setUsername] = useState("");
@@ -41,11 +41,11 @@ export default function NewPost() {
     };
     console.log(newPostObj);
     hideForm();
+
     submitPostReq(newPostObj);
   };
 
   const submitPostReq = async (data) => {
-    console.log("submitPostReq:", data);
     try {
       await axios.post("http://localhost:8080/newpost", data);
     } catch (error) {
@@ -116,16 +116,14 @@ export default function NewPost() {
                 type="file"
                 name="pic"
                 onChange={(e) => {
-                  const img = e.target.files[0];
-                  setImage(img);
-                  imgUpload(img);
+                  setImage(e.target.files[0]);
+                  imgUpload(e.target.files[0]);
                 }}
               />
             </div>
             <button
               type="submit"
               className="border  border-red-600 px-10 py-2 mt-2"
-              // onClick={uploadImg}
             >
               {" "}
               Post

@@ -11,6 +11,7 @@ function App() {
   const [postData, setPostData] = useState(null);
   const [view, setView] = useState("feed");
   const [selectedPost, setSelectedPost] = useState([][0]);
+
   const fetchData = async () => {
     const response = await axios.get("http://localhost:8080/posts");
     console.log(response.data);
@@ -38,7 +39,7 @@ function App() {
   } else {
     return (
       <div>
-        <Navbar />
+        <Navbar setView={setView} />
         <IndividualPost
           setView={setView}
           postData={postData}

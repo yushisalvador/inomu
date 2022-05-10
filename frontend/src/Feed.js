@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 export default function Feed({ postData, setSelectedPost, setView }) {
   if (postData !== null) {
     return (
@@ -20,25 +20,49 @@ export default function Feed({ postData, setSelectedPost, setView }) {
             };
             return (
               <div key={index} className=" h-90 w-80 p-4 border-4 ml-10 mt-20">
-                <div className="font-medium text-xl ">
-                  {" "}
-                  {postObj.cocktail_name}
+                <div className="flex flex-row justify-between ">
+                  <div className="font-medium text-xl">
+                    {" "}
+                    {postObj.cocktail_name}
+                  </div>
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-6 text-white hover:text-black"
+                      fill="white"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
                 </div>
+
                 <div>
                   Posted by user{" "}
                   <span className="font-medium">{postObj.username}</span>
                 </div>
                 <div>
-                  <img src={postObj.image} alt="cocktail" />
-                </div>
-                <div
-                  onClick={() => {
-                    setSelectedPost(index);
-                    setView("single");
-                  }}
-                >
-                  {" "}
-                  See Recipe
+                  <img
+                    src={postObj.image}
+                    alt="cocktail"
+                    object-cover
+                    className="object-cover h-48 w-96 mt-5"
+                  />{" "}
+                  <div
+                    onClick={() => {
+                      setSelectedPost(index);
+                      setView("single");
+                    }}
+                    className="hover:cursor-pointer hover:underline mt-2"
+                  >
+                    See Recipe
+                  </div>
                 </div>
               </div>
             );
