@@ -29,7 +29,7 @@ export default function Feed({ postData, setSelectedPost, setView }) {
                   <span className="font-medium">{postObj.username}</span>
                 </div>
                 <div>
-                  <img src={postObj.image} />
+                  <img src={postObj.image} alt="cocktail" />
                 </div>
                 <div
                   onClick={() => {

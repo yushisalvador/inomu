@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { storage } from "./firebase";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function NewPost() {
   const [button, setShowButton] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [username, setUsername] = useState("");
   const [image, setImage] = useState("");
+  const [ingredients, setIngredients] = useState("");
   const [cocktail, setCocktail] = useState("");
   const [description, setDescription] = useState("");
   const [recipe, setRecipe] = useState("");
   const [data, setData] = useState({});
   const [imageURL, setImageURL] = useState("");
 
+  const metadata = {
+    contentType: "image/jpeg",
+  };
+
   const imgUpload = () => {
     const imageRef = ref(storage, `cocktails/${image.name}`);
-    uploadBytes(imageRef, image).then((snapshot) => {
+    uploadBytes(imageRef, image, metadata).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageURL(url);
       });
@@ -25,22 +30,18 @@ export default function NewPost() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    imgUpload();
     const newPostObj = {
       username: username,
       image: imageURL,
       cocktail_name: cocktail,
       description: description,
+      ingredients: ingredients,
       recipe: recipe,
     };
     console.log(newPostObj);
-    setData(newPostObj);
     hideForm();
+    submitPostReq(newPostObj);
   };
-
-  // const handlePost = () => {
-  //   submitPostReq(data);
-  // };
 
   const submitPostReq = async (data) => {
     try {
@@ -58,19 +59,6 @@ export default function NewPost() {
     setShowForm(true);
     setShowButton(false);
   };
-
-  useEffect(() => {
-    if (
-      data.username &&
-      data.cocktail_name &&
-      data.image &&
-      data.recipe &&
-      data.ingredients
-    ) {
-      submitPostReq(data).then((res) => console.log(res));
-      // setNewData(res));
-    }
-  }, [data]);
 
   return (
     <div className=" flex justify-center">
@@ -103,6 +91,15 @@ export default function NewPost() {
                 onChange={(e) => setDescription(e.target.value)}
               />
             </div>
+
+            <div className="flex flex-col mb-4">
+              <label>Ingredients </label>
+              <textarea
+                className="border border-red-600 "
+                value={ingredients}
+                onChange={(e) => setIngredients(e.target.value)}
+              />
+            </div>
             <div className="flex flex-col mb-4">
               <label>Recipe </label>
               <textarea
@@ -111,12 +108,14 @@ export default function NewPost() {
                 onChange={(e) => setRecipe(e.target.value)}
               />
             </div>
+
             <div>
               <input
                 type="file"
                 name="pic"
                 onChange={(e) => {
                   setImage(e.target.files[0]);
+                  imgUpload();
                 }}
               />
             </div>

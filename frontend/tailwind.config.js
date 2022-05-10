@@ -13,7 +13,7 @@ module.exports = {
         background: "#0e2431",
       },
       fontFamily: {
-        body: ["Dosis"],
+        body: ["Dosis", "Alfa Slab One"],
       },
     },
   },
