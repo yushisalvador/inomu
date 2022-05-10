@@ -4,10 +4,13 @@ import Navbar from "./Navbar";
 import Feed from "./Feed";
 import NewPost from "./NewPost";
 import axios from "axios";
+import IndividualPost from "./IndividualPost";
+import Banner from "./Banner";
 
 function App() {
   const [postData, setPostData] = useState(null);
-  const [singleView, setSingleView] = useState("preview");
+  const [view, setView] = useState("feed");
+  const [selectedPost, setSelectedPost] = useState([][0]);
   const fetchData = async () => {
     const response = await axios.get("http://localhost:8080/posts");
     console.log(response.data);
@@ -18,11 +21,27 @@ function App() {
     fetchData();
   }, []);
   return (
-    <div className="App">
+    <div>
       <Navbar />
+      <Banner />
       <NewPost />
       <div>
-        <Feed postData={postData} />
+        {view === "feed" ? (
+          <Feed
+            postData={postData}
+            setSelectedPost={setSelectedPost}
+            setView={setView}
+          />
+        ) : view === "single" ? (
+          <IndividualPost
+            setView={setView}
+            postData={postData}
+            selectedPost={selectedPost}
+            setSelectedPost={setSelectedPost}
+          />
+        ) : (
+          <div>loading</div>
+        )}
       </div>
     </div>
   );

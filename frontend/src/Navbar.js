@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <div className="text-primary text-3xl font-body border-b border-gray-100 flex flex-row justify-between pt-6 pb-1 bg-slate-100">
+    <div className="text-primary text-3xl font-body border-b border-gray-100 flex flex-row justify-between pt-10 h-26 bg-slate-100 w-full">
       {" "}
       <div className="ml-3">INOMU</div>
       <ul className="flex flex-row self-stretch">

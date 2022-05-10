@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { storage } from "./firebase";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 
 export default function NewPost() {
   const [button, setShowButton] = useState(true);
@@ -10,13 +12,23 @@ export default function NewPost() {
   const [description, setDescription] = useState("");
   const [recipe, setRecipe] = useState("");
   const [data, setData] = useState({});
-  const [imagePath, setImagePath] = useState("");
+  const [imageURL, setImageURL] = useState("");
+
+  const imgUpload = () => {
+    const imageRef = ref(storage, `cocktails/${image.name}`);
+    uploadBytes(imageRef, image).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImageURL(url);
+      });
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const imageStr = await image.text();
+    imgUpload();
     const newPostObj = {
       username: username,
-      image: image,
+      image: imageURL,
       cocktail_name: cocktail,
       description: description,
       recipe: recipe,
@@ -24,12 +36,11 @@ export default function NewPost() {
     console.log(newPostObj);
     setData(newPostObj);
     hideForm();
-    handlePost();
   };
 
-  const handlePost = () => {
-    submitPostReq(data);
-  };
+  // const handlePost = () => {
+  //   submitPostReq(data);
+  // };
 
   const submitPostReq = async (data) => {
     try {
@@ -47,6 +58,19 @@ export default function NewPost() {
     setShowForm(true);
     setShowButton(false);
   };
+
+  useEffect(() => {
+    if (
+      data.username &&
+      data.cocktail_name &&
+      data.image &&
+      data.recipe &&
+      data.ingredients
+    ) {
+      submitPostReq(data).then((res) => console.log(res));
+      // setNewData(res));
+    }
+  }, [data]);
 
   return (
     <div className=" flex justify-center">
@@ -91,16 +115,15 @@ export default function NewPost() {
               <input
                 type="file"
                 name="pic"
-                value={imagePath}
                 onChange={(e) => {
                   setImage(e.target.files[0]);
-                  setImagePath(e.target.value);
                 }}
               />
             </div>
             <button
               type="submit"
               className="border  border-red-600 px-10 py-2 mt-2"
+              // onClick={uploadImg}
             >
               {" "}
               Post
