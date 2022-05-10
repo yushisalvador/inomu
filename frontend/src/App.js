@@ -20,31 +20,34 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
-  return (
-    <div>
-      <Navbar />
-      <Banner />
-      <NewPost />
+
+  if (view === "feed") {
+    return (
       <div>
-        {view === "feed" ? (
-          <Feed
-            postData={postData}
-            setSelectedPost={setSelectedPost}
-            setView={setView}
-          />
-        ) : view === "single" ? (
-          <IndividualPost
-            setView={setView}
-            postData={postData}
-            selectedPost={selectedPost}
-            setSelectedPost={setSelectedPost}
-          />
-        ) : (
-          <div>loading</div>
-        )}
+        <Navbar />
+        <Banner />
+        <NewPost />
+
+        <Feed
+          postData={postData}
+          setSelectedPost={setSelectedPost}
+          setView={setView}
+        />
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div>
+        <Navbar />
+        <IndividualPost
+          setView={setView}
+          postData={postData}
+          selectedPost={selectedPost}
+          setSelectedPost={setSelectedPost}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;

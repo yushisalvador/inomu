@@ -4,11 +4,11 @@ export default function Feed({ postData, setSelectedPost, setView }) {
   if (postData !== null) {
     return (
       <div>
-        <div className="font-bold pb-2 m-10 text-center text-4xl text-primary border-b border-gray-200">
+        <div className="font-bold pb-2 mt-10 text-center text-4xl text-primary border-b border-gray-200">
           Cocktail Feed
         </div>
 
-        <div className="flex flex-row flex-wrap justify-center ">
+        <div className="flex flex-row flex-wrap justify-center mb-10 ">
           {postData.map((post, index) => {
             const postObj = {
               username: post.username,
