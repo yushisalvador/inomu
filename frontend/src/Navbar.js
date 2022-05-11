@@ -2,9 +2,11 @@ import React from "react";
 
 export default function Navbar({ setView }) {
   return (
-    <div className="text-primary text-3xl font-body border-b border-gray-100 flex flex-row justify-between pt-10 h-26 bg-slate-100 w-full">
+    <div className="text-primary sticky top-0 z-50 text-3xl font-body border-b border-gray-100 flex flex-row justify-between pt-10 h-26 bg-slate-100 w-full">
       {" "}
-      <div className="ml-3 text-5xl font-body">INOMU</div>
+      <div>
+        <div className="ml-3 text-5xl font-body">INOMU</div>
+      </div>
       <ul className="flex flex-row self-stretch">
         <li
           className="ml-4 text-2xl hover:underline hover:cursor-pointer"

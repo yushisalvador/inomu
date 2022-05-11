@@ -7,6 +7,23 @@ export default function Feed({ postData, setSelectedPost, setView }) {
         <div className="font-bold pb-2 mt-10 text-center text-4xl text-primary border-b border-gray-200">
           Cocktail Feed
         </div>
+        <div className="flex flex-row justify-center mt-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+          <input type="text" className="border-2" />
+        </div>
 
         <div className="flex flex-row flex-wrap justify-center mb-10 ">
           {postData.map((post, index) => {
