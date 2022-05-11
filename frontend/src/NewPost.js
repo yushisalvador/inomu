@@ -19,14 +19,15 @@ export default function NewPost({}) {
     contentType: "image/jpeg",
   };
 
-  const imgUpload = (image) => {
-    const imageRef = ref(storage, `cocktails/${image.name}`);
-    uploadBytes(imageRef, image, metadata).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        console.log("setting imageUrl to:", url);
-        setImageURL(url);
-      });
-    });
+  const imgUpload = async (image) => {
+    try {
+      const imageRef = ref(storage, `cocktails/${image.name}`);
+      const snapshot = await uploadBytes(imageRef, image, metadata);
+      const url = await getDownloadURL(snapshot.ref);
+      setImageURL(url);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = (event) => {

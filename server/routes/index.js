@@ -25,4 +25,14 @@ router.post("/newpost", async (req, res) => {
   console.log("saving", postObj);
   await knex("posts").insert(postObj);
 });
+
+router.delete("/del/:input", async (req, res) => {
+  const input = parseInt(req.params.input);
+
+  await knex("posts").where({ id: input }).del();
+
+  const posts = await knex.select("id").from("posts");
+
+  res.status(200).send(posts);
+});
 module.exports = router;

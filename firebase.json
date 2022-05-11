@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "/public",
+    "public": "frontend/build",
     "port": 8080,
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
